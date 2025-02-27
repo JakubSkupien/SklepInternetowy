@@ -1,7 +1,8 @@
-# SklepInternetowy
+# Dokumentacja projektu "Projekt_ASPNET_Magazyn"
 
 ## 1. Opis projektu
-Projekt **"SklepInternetowy"** to aplikacja webowa umożliwiająca zarządzanie produktami oraz zamówieniami w sklepie internetowym. Aplikacja obsługuje dwa typy użytkowników:
+
+PProjekt **"SklepInternetowy"** to aplikacja webowa umożliwiająca zarządzanie produktami oraz zamówieniami w sklepie internetowym. Aplikacja obsługuje dwa typy użytkowników:
 
 - **Administrator** – może zarządzać produktami, użytkownikami i zamówieniami.
 - **Zwykły użytkownik** – może przeglądać ofertę sklepu, dodawać produkty do koszyka i składać zamówienia.
@@ -11,6 +12,9 @@ Aplikacja została stworzona w **ASP.NET Core MVC** z wykorzystaniem **Entity Fr
 ---
 
 ## 2. Struktura projektu
+
+### Główne elementy projektu:
+
 SklepInternetowy
 SklepInternetowy csproj - Plik projektu
 Program cs - Konfiguracja aplikacji
@@ -45,78 +49,102 @@ Migrations - Pliki migracji Entity Framework
 
 ## 3. Kluczowe funkcjonalności
 
-###  Dla administratora:
-- Zarządzanie produktami (dodawanie, edytowanie, usuwanie)
-- Przeglądanie i zarządzanie zamówieniami
-- Przeglądanie listy użytkowników
+### Dla administratora:
 
-###  Dla użytkownika:
-- Przeglądanie produktów
-- Dodawanie produktów do koszyka
-- Składanie zamówień
-- Przeglądanie historii zamówień
+- Może przeglądać, edytować i usuwać produkty.
+- Może zarządzać zamówieniami
+- Ma dostęp do listy użytkowników.
+
+### Dla zwykłego użytkownika:
+
+- Przeglądanie dostępnych produktów.
+- Składanie zamówień.
+- Przeglądanie historii swoich zamówień.
 
 ---
 
 ## 4. Instrukcja uruchomienia
 
-###  Wymagania wstępne:
-- **.NET SDK 8.0+**
-- **SQL Server Express** lub **LocalDB**
-- **Visual Studio 2022** (z zainstalowanym ASP.NET & EF Core)
+1. **Wymagania wstępne:**
 
-###  Konfiguracja bazy danych
-Edytuj plik `appsettings.json` i ustaw połączenie do **SQL Server**:
+   - Zainstalowany .NET SDK 6.0 lub nowszy.
+   - SQL Server do obsługi bazy danych.
 
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=YOUR_SERVER\\SQLEXPRESS;Database=EcommerceDb;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False;"
-  }
-}
-Migracje bazy danych
+2. **Konfiguracja:**
 
-Uruchom następujące komendy:
+   - W pliku `appsettings.json` ustaw poprawne dane połączenia z bazą danych:
+     ```json
+     "ConnectionStrings": {
+         "DefaultConnection": "Data Source=YOUR_SERVER;Initial Catalog=Test;Integrated Security=True;TrustServerCertificate=True"
+     }
+     ```
 
-    dotnet ef database update
+3. **Migracje bazy danych:**
 
- Uruchomienie aplikacji
-    Wybierz SklepInternetowy.csproj jako domyślny projekt startowy.
+   - W konsoli NuGet wykonaj komendy:
+     ```
+     Update-Database
+     ```
 
-W Package Manager Console wykonaj:
+4. **Uruchomienie aplikacji:**
 
-    dotnet ef database update
+   - W Visual Studio wybierz `Test.sln`.
+   - W konsoli NuGet wykonaj komende:
+     'dotnet run'
+   - Otwórz przeglądarkę i przejdź do:
+      http://localhost:5035/
 
-Otwórz przeglądarkę i przejdź do:
+---
 
-    http://localhost:5035/
-    
-5. Informacje o bazie danych
-    Struktura tabel:
+## 5. Informacje o bazie danych
+
+### Struktura tabel::
+
     Users – Przechowuje dane użytkowników (nazwa, email, hasło).
     Products – Przechowuje produkty (nazwa, cena, opis, kategoria).
     Categories – Lista kategorii produktów.
     Orders – Zamówienia użytkowników.
     OrderItems – Pozycje zamówienia (produkty w zamówieniu).
     Inicjalizacja danych
-    Plik SeedData.cs dodaje przykładowe kategorie i produkty do bazy.
+    Plik SeedData.cs dodaje przykładowe kategorie i produkty do bazy..
 
-6. Uprawnienia użytkowników
-    Administrator (Admin)
-    Może przeglądać, edytować i usuwać produkty.
-    Może zarządzać zamówieniami.
-    Ma dostęp do listy użytkowników.
-    Zwykły użytkownik (User)
-    Może przeglądać produkty.
-    Może dodawać produkty do koszyka.
-    Może składać zamówienia.
-Ma dostęp do historii swoich zamówień.
-7. Widoki aplikacji
- Dla administratora:
+### Inicjalizacja danych:
+
+W pliku `Program.cs` aplikacja:
+
+- Tworzy domyślne role `Admin` i `User`.
+- Dodaje użytkownika admina (`admin@admin.com`) z hasłem (`Admin1234!`) i użytkownika (`user@user.com`) z hasłem (`User1234!`).
+- Inicjalizuje tabelę `Asortyment` przykładowymi produktami.
+
+---
+
+## 6. Uprawnienia użytkowników
+
+### Administrator (Admin):
+
+- Dostęp do wszystkich funkcji aplikacji.
+- Możliwość przeglądania, edytowania i usuwania produktów.
+- Możliwość przeglądania i usuwania zamówień.
+- Podgląd na wszystkich użytkowników i sumaryczną liczbę ich zamówień.
+
+### Zwykły użytkownik (User):
+
+- Dostęp do przeglądania asortymentu.
+- Możliwość składania zamówień.
+- Możliwość przeglądania swoich zamówień.
+
+---
+
+## 7. Widoki aplikacji
+
+### Dla administratora:
+
     /Products/Index – Lista produktów z opcjami zarządzania
     /Orders/Index – Lista zamówień
     /Users/Index – Lista użytkowników
 
- Dla użytkownika:
+### Dla użytkownika:
+
     /Products/UserIndex – Przeglądanie produktów
     /Orders/UserOrders – Historia zamówień
+

@@ -1,0 +1,9 @@
+﻿@model SklepInternetowy.Models.Product
+
+<h2>Szczegóły Produktu</h2>
+
+<p><strong>Nazwa:</strong> @Model.Name</p>
+<p><strong>Cena:</strong> @Model.Price.ToString("C")</p>
+<p><strong>Opis:</strong> @Model.Description</p>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Powrót</a>

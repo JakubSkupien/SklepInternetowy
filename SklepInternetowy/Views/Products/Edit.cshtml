@@ -1,0 +1,25 @@
+﻿@model SklepInternetowy.Models.Product
+
+<h2>Edytuj Produkt</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name">Nazwa Produktu</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Cena</label>
+        <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Opis</label>
+        <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Zapisz</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Anuluj</a>
+</form>

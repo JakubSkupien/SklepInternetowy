@@ -1,0 +1,20 @@
+﻿@model SklepInternetowy.Models.Cart
+
+<h2>Checkout</h2>
+
+@if (Model?.CartItems?.Count > 0) 
+{
+    <ul>
+        @foreach (var item in Model.CartItems) 
+        {
+            <li>@item.Product.Name - @item.Quantity x $@item.Product.Price</li>
+        }
+    </ul>
+    <form asp-controller="Checkout" asp-action="PlaceOrder" method="post">
+        <button type="submit">Confirm Order</button>
+    </form>
+}
+else
+{
+    <p>No items in cart.</p>
+}

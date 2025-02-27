@@ -1,0 +1,14 @@
+﻿@model SklepInternetowy.Models.Order
+
+<h2>Order Confirmation</h2>
+<p>Thank you for your order! Your order ID is: @Model.Id</p>
+<p>Order Date: @Model.OrderDate</p>
+<p>Total Amount: $@Model.TotalAmount</p>
+
+<h3>Order Details</h3>
+<ul>
+    @foreach (var item in Model.OrderItems)
+    {
+        <li>@item.Product.Name - @item.Quantity x $@item.Price</li>
+    }
+</ul>

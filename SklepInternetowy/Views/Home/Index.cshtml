@@ -1,0 +1,33 @@
+﻿@model IEnumerable<SklepInternetowy.Models.Product>
+
+<h2>Lista Produktów</h2>
+
+<a asp-controller="Products" asp-action="Create" class="btn btn-primary mb-3">Dodaj Nowy Produkt</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Cena</th>
+            <th>Opis</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price.ToString("C")</td>
+                <td>@product.Description</td>
+                <td>
+                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Edytuj</a>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-info">Szczegóły</a>
+                    <form asp-controller="Products" asp-action="DeleteConfirmed" asp-route-id="@product.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
